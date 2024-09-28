@@ -73,3 +73,4 @@ crashlytics-build.properties
 
 # 애셋 무시
 /Assets/99_ExternalAssets
+/Assets/CodeMonkey
