@@ -6,6 +6,6 @@ public class Testing : MonoBehaviour
 {
     private void Start()
     {
-        Grid grid = new Grid(4, 3);
+        Grid grid = new Grid(4, 3, 10f);
     }
 }
