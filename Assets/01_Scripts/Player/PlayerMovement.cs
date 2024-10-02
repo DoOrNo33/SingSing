@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CharacterController characterController;
-    [SerializeField] float moveSpeed = 12f;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private float moveSpeed = 12f;
+    private bool isReflection = false;
 
     // 캐릭터 컨트롤러를 이용해서 플레이어가 특별한 조작 없이는 계속 앞으로 움직임
     private void FixedUpdate()
@@ -15,8 +16,15 @@ public class PlayerMovement : MonoBehaviour
     
     private void MovePlayer()
     {
-        characterController.Move(Vector3.forward * moveSpeed * Time.deltaTime);
+        if (!IsReflection)
+        {
+           characterController.Move(Vector3.forward * moveSpeed * Time.deltaTime);
+        }
     }
 
-
+    public bool IsReflection
+    {
+        get => isReflection;
+        set => isReflection = value;
+    }
 }
