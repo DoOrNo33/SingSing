@@ -8,15 +8,17 @@ public class Grid
     private int width;
     private int height;
     private float cellSize;
+    private Vector3 originPosition;
     private int fontSize = 20;
     private int[,] gridArray;
     private TextMesh[,] debugTextArray;
 
-    public Grid(int width, int height, float cellSize)
+    public Grid(int width, int height, float cellSize, Vector3 originPosition)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
+        this.originPosition = originPosition;
 
         gridArray = new int[width, height];
         debugTextArray = new TextMesh[width, height];
@@ -38,13 +40,13 @@ public class Grid
 
     private Vector3 GetWorldPosition(int x, int z)
     {
-        return new Vector3(x, 0, z) * cellSize;
+        return new Vector3(x, 0, z) * cellSize + originPosition;
     }
 
     private void GetXZ(Vector3 worldPosition, out int x, out int z)
     {
-        x = Mathf.FloorToInt(worldPosition.x / cellSize);
-        z = Mathf.FloorToInt(worldPosition.z / cellSize);
+        x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
+        z = Mathf.FloorToInt((worldPosition - originPosition).z / cellSize);
     }
 
     public void SetValue(int x, int z, int value)
