@@ -1164,8 +1164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   rb: {fileID: 1010548850}
-  reflectionPower: 50
-  dragDuringReflection: 10
+  reflectionPower: 70
+  dragDuringReflection: 7
 --- !u!54 &1010548850
 Rigidbody:
   m_ObjectHideFlags: 0

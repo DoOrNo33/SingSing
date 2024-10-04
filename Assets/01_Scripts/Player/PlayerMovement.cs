@@ -8,6 +8,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float reflectionPower = 100f;
     [SerializeField] private float dragDuringReflection = 10f;
+    private Vector3[] directions = 
+        { Vector3.forward,
+        Vector3.right,
+        Vector3.back,
+        Vector3.left
+        };
+    private Vector3 playerDir;
+    
     private bool isReflection = false;
     
     public bool IsReflection
@@ -16,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         set => isReflection = value;
     }
 
-    // 캐릭터 컨트롤러를 이용해서 플레이어가 특별한 조작 없이는 계속 앞으로 움직임
     private void FixedUpdate()
     {
         MovePlayer();
@@ -28,10 +35,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = Vector3.forward * moveSpeed;
         }
-        //else
-        //{
-        //    rb.velocity = Vector3.zero;  // 반사 중일 때는 속도를 0으로 설정
-        //}
     }
 
     public void ReflectPlayer(Vector3 reflectionDir)
