@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float reflectionPower = 100f;
+    [SerializeField] private float dragDuringReflection = 10f;
     private bool isReflection = false;
     
     public bool IsReflection
@@ -24,9 +26,30 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!IsReflection)
         {
-            Vector3 newPosition = rb.position + Vector3.forward * moveSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(newPosition);
+            rb.velocity = Vector3.forward * moveSpeed;
+        }
+        //else
+        //{
+        //    rb.velocity = Vector3.zero;  // 반사 중일 때는 속도를 0으로 설정
+        //}
+    }
+
+    public void ReflectPlayer(Vector3 reflectionDir)
+    {
+        if (rb != null)
+        {
+            isReflection = true;
+            rb.drag = dragDuringReflection; // 반사 중일 때 드래그 적용
+            rb.AddForce(reflectionDir * reflectionPower, ForceMode.Impulse);
+            StartCoroutine(ResetReflection());
         }
     }
 
+    private IEnumerator ResetReflection()
+    {
+        yield return new WaitForSeconds(0.5f); // 반사 후 0.5초 동안 이동 멈춤
+
+        rb.drag = 0; // 드래그 초기화
+        isReflection = false;
+    }
 }
