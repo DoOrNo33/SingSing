@@ -9,14 +9,11 @@ public class ReflectionObject : MonoBehaviour
     // 팅겨내는 힘의 세기
     [SerializeField] private float reflectionPower = 10f;
 
-    // 팅겨내는 방향
-    private Vector3 reflectionDir;
-
     // 3D 콜라이더
     [SerializeField] private Collider col;
 
-    // 팅겨내는 힘을 가하는 함수
-
+    // 리지드바디 테스트용
+    [SerializeField] private Rigidbody playerRb;
 
     // 충돌이 일어났을 때 호출되는 함수
     private void OnCollisionEnter(Collision other)
@@ -25,35 +22,28 @@ public class ReflectionObject : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // 플레이어의 이동을 멈춤
-            pm.IsReflection = true;
+            // pm.IsReflection = true;
 
             // 팅겨내는 방향을 계산
-            reflectionDir = (other.transform.position - transform.position).normalized;
 
-            // 팅겨내는 힘을 가함
-            CharacterController cc = other.gameObject.GetComponent<CharacterController>();
-            if (cc != null)
+            playerRb = other.gameObject.GetComponent<PlayerCol>().PlayerRb;
+            if (playerRb != null)
             {
-                Vector3 force = reflectionDir * reflectionPower;
-                StartCoroutine(ApplyForce(cc, force));
+                // 팅겨내는 방향을 계산
+                Vector3 playerVelocity = playerRb.velocity;
+                Vector3 reflectionDir = -playerVelocity.normalized;
+
+                // 팅겨내는 힘을 가함
+                playerRb.AddForce(reflectionDir * reflectionPower, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.LogError("PlayerRb is not assigned in PlayerCol component.");
             }
         }
-    }
-
-    private IEnumerator ApplyForce(CharacterController cc, Vector3 force)
-    {
-        float duration = 0.2f; // 0.2초 동안 힘을 가함
-        float elapsedTime = 0f; // 경과 시간
-        Vector3 originalVelocity = cc.velocity; // 기존 이동 벡터 저장
-
-        while (elapsedTime < duration)
+        else
         {
-            cc.Move(force * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            Debug.LogError("PlayerCol component is not found on the Player object.");
         }
-
-        cc.Move(originalVelocity * Time.deltaTime); // 기존 이동 벡터 복원
-        pm.IsReflection = false; // 플레이어 이동 재개
     }
 }

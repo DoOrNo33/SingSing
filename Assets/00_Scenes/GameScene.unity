@@ -754,8 +754,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 1010548849}
-  reflectionPower: 200
+  reflectionPower: 10
   col: {fileID: 442845624}
+  playerRb: {fileID: 0}
 --- !u!65 &442845624
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1128,8 +1129,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1010548847}
-  - component: {fileID: 1010548848}
   - component: {fileID: 1010548849}
+  - component: {fileID: 1010548850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1153,32 +1154,6 @@ Transform:
   - {fileID: 1403490275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1010548848
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010548846}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1010548849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,8 +1166,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d85e45122474b1d9725799025f0ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 1010548848}
   moveSpeed: 12
+  rb: {fileID: 1010548850}
+--- !u!54 &1010548850
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010548846}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &1012205674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,9 +1721,10 @@ GameObject:
   - component: {fileID: 1403490278}
   - component: {fileID: 1403490277}
   - component: {fileID: 1403490276}
+  - component: {fileID: 1403490279}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1814,6 +1817,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403490274}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1403490279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403490274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39de121992e9448c4ada1a1911a063be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerRb: {fileID: 1010548850}
 --- !u!1 &1447818083
 GameObject:
   m_ObjectHideFlags: 0
