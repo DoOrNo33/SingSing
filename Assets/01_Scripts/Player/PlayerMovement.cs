@@ -8,12 +8,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float reflectionPower = 100f;
     [SerializeField] private float dragDuringReflection = 10f;
+
+    // 플레이어 이동 방향
     private Vector3[] directions = 
         { Vector3.forward,
         Vector3.right,
         Vector3.back,
         Vector3.left
         };
+    private int dirIndex = 0;
     private Vector3 playerDir;
     
     private bool isReflection = false;
@@ -22,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     {
         get => isReflection;
         set => isReflection = value;
+    }
+
+    private void Start()
+    {
+        playerDir = directions[dirIndex];
     }
 
     private void FixedUpdate()
@@ -33,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!IsReflection)
         {
-            rb.velocity = Vector3.forward * moveSpeed;
+            rb.velocity = playerDir * moveSpeed;
         }
     }
 
@@ -54,5 +62,24 @@ public class PlayerMovement : MonoBehaviour
 
         rb.drag = 0; // 드래그 초기화
         isReflection = false;
+    }
+
+    public void SetDirection(int dir)
+    {
+        dirIndex += dir;
+
+        // dirIndex가 최대값을 초과하면 최소값으로 초기화
+        if (dirIndex >= directions.Length)
+        {
+            dirIndex = 0;
+        }
+        // dirIndex가 최소값보다 작다면 최대값으로 초기화
+        if (dirIndex < 0)
+        {
+            dirIndex = (directions.Length - 1);
+        }
+
+
+        playerDir = directions[dirIndex];
     }
 }
