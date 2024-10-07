@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : PlayerMoveBase
 {
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private Rigidbody rb;
@@ -81,5 +81,25 @@ public class PlayerMovement : MonoBehaviour
 
 
         playerDir = directions[dirIndex];
+    }
+
+    public override void Enter()
+    {
+
+    }
+
+    public override void Execute(PlayerController controller)
+    {
+
+    }
+
+    public override void PhysicsUpdate()
+    {
+
+    }
+
+    public override void Exit()
+    {
+
     }
 }
