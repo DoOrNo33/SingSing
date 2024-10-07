@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : PlayerMoveBase
+public class PlayerMovement : PlayerStateBase
 {
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private Rigidbody rb;
@@ -27,15 +27,6 @@ public class PlayerMovement : PlayerMoveBase
         set => isReflection = value;
     }
 
-    private void Start()
-    {
-        playerDir = directions[dirIndex];
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
     
     private void MovePlayer()
     {
@@ -85,17 +76,20 @@ public class PlayerMovement : PlayerMoveBase
 
     public override void Enter()
     {
-
+        playerDir = directions[dirIndex];
     }
 
     public override void Execute(PlayerController controller)
     {
-
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            controller.ChangeState(controller.pjs);
+        }
     }
 
     public override void PhysicsUpdate()
     {
-
+        MovePlayer();
     }
 
     public override void Exit()

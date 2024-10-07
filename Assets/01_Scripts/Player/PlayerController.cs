@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     }
 
     ////////////////////////////////
-    private PlayerMoveBase currentState = null;
+    private PlayerStateBase currentState = null;
+
+    public PlayerJumpState pjs;
     
 
 
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 상태 변경 시 호출
-    public void ChangeState(PlayerMoveBase newState)
+    public void ChangeState(PlayerStateBase newState)
     {
         currentState?.Exit();
         currentState = newState;

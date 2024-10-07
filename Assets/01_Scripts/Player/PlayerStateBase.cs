@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerMoveBase : MonoBehaviour
+public abstract class PlayerStateBase : MonoBehaviour
 {
     public abstract void Enter();
 
