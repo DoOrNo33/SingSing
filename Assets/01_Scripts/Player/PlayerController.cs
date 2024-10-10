@@ -5,7 +5,7 @@ using static Enums;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement pm;
+    public PlayerMovement pm;
 
     public void TurnLeft()
     {

@@ -10,6 +10,9 @@ public class PlayerJumpState : PlayerStateBase
     // 점프시킬 플레이어 오브젝트
     [SerializeField] private GameObject player;
 
+    // 점프 시간
+    [SerializeField] private float jumpDuration = 0.2f;
+
     // 레이캐스트 길이
     private float rayLength = 0.1f;
     
@@ -24,7 +27,10 @@ public class PlayerJumpState : PlayerStateBase
 
     public override void Execute(PlayerController controller)
     {
-        
+        if (isJump == false)
+        {
+            controller.ChangeState(controller.pm);
+        }
     }
 
     public override void Exit()
@@ -34,29 +40,28 @@ public class PlayerJumpState : PlayerStateBase
 
     public override void PhysicsUpdate()
     {
-        if (isJump)
-        {
-            // 플레이어 아래로 레이캐스트 발사해서 지면에 착지했는지 체크
-            RaycastHit hit;
-            if (Physics.Raycast(rb.position, Vector3.down, out hit, 0.1f))
-            {
-                // 지면에 닿았다면
-                if (hit.collider.CompareTag("Ground"))
-                {
-                    Debug.Log("Ground");
-                    // 점프 상태에서 이동 상태로 변경
-                    // controller.ChangeState(controller.pm);
-                }
-            }
-        }
+        // if (isJump)
+        // {
+        //     // 플레이어 아래로 레이캐스트 발사해서 지면에 착지했는지 체크
+        //     RaycastHit hit;
+        //     if (Physics.Raycast(rb.position, Vector3.down, out hit, 0.1f))
+        //     {
+        //         // 지면에 닿았다면
+        //         if (hit.collider.CompareTag("Ground"))
+        //         {
+        //             Debug.Log("Ground");
+        //             // 점프 상태에서 이동 상태로 변경
+        //             // controller.ChangeState(controller.pm);
+        //         }
+        //     }
+        // }
     }
 
     public IEnumerator JumpPlayer()
     {
-        float jumpDuration = 1.0f;
         float gameSpeed = 1.0f;
         float baseHeight = 1.0f;
-        float jumpHeight = 3.0f;
+        float jumpHeight = 4.0f;
 
         if (player.transform.position.y < jumpHeight)
         {
@@ -66,10 +71,32 @@ public class PlayerJumpState : PlayerStateBase
                 jumpTime += Time.deltaTime * gameSpeed;
                 float ratio = Mathf.Clamp01(jumpTime / jumpDuration);
                 player.transform.position = new Vector3(player.transform.position.x, Mathf.Lerp(baseHeight, jumpHeight, ratio), player.transform.position.z);
+                yield return null;
             }
-            Debug.Log("Jump");
-        }
 
-        yield return null;
+            // 점프 후 다운 상태로 변경
+            StartCoroutine(DownPlayer());
+        }
+    }
+
+    public IEnumerator DownPlayer()
+    {
+        float gameSpeed = 1.0f;
+        float baseHeight = 1.0f;
+        float jumpHeight = 4.0f;
+
+        if (player.transform.position.y > baseHeight)
+        {
+            float jumpTime = 0.0f;
+            while (jumpTime < jumpDuration)
+            {
+                jumpTime += Time.deltaTime * gameSpeed;
+                float ratio = Mathf.Clamp01(jumpTime / jumpDuration);
+                player.transform.position = new Vector3(player.transform.position.x, Mathf.Lerp(jumpHeight, baseHeight, ratio), player.transform.position.z);
+                yield return null;
+            }
+
+            isJump = false;
+        }
     }
 }
