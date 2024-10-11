@@ -11,7 +11,7 @@ public class PlayerCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Cube"))
+        if (other.gameObject.CompareTag("ReflectionObj"))
         {
             // 충돌 시 playerRb가 null이 아니라면,
             if (playerRb != null)
