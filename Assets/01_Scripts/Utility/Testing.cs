@@ -11,15 +11,15 @@ public class Testing : MonoBehaviour
         grid = new Grid(4, 2, 10f, new Vector3(20, 0));
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3? hitPoint = GetMouseWorldPositionOnPlane();
-            // grid.SetValue(UtilsClass.GetMouseWorldPosition(), 56);
-            grid.SetValue(hitPoint.Value, 56);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         Vector3? hitPoint = GetMouseWorldPositionOnPlane();
+    //         // grid.SetValue(UtilsClass.GetMouseWorldPosition(), 56);
+    //         grid.SetValue(hitPoint.Value, 56);
+    //     }
+    // }
 
     private Vector3? GetMouseWorldPositionOnPlane()
     {

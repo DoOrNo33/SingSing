@@ -66,4 +66,14 @@ public class Grid
         GetXZ(worldPosition, out x, out z);
         SetValue(x, z, value);
     }
+
+    // 장애물 제작용 그리드 포지션 반환
+    public Vector3 GetPosition(Vector3 worldPosition)
+    {
+        int x;
+        int z;
+        GetXZ(worldPosition, out x, out z);
+        // 그리드 좌표에 해당하는 월드 좌표 반환
+        return new Vector3 (x, 0, z) * cellSize + originPosition;
+    }
 }

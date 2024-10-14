@@ -8,6 +8,7 @@ public class Enums
 
     public enum ObstacleType
     {
+        Null,
         Trap,
         Score,
         Reflection,
