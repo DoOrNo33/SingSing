@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class TrapObjCol : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TrapObj trapObj;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            trapObj.Trap();
+        }
     }
 }
