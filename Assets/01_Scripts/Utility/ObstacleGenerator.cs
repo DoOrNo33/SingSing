@@ -15,21 +15,44 @@ public class ObstacleGenerator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3? hitPoint = GetMouseWorldPositionOnPlane();
-            Vector3 pos = grid.GetPosition(hitPoint.Value);
+            if (hitPoint.HasValue)
+            {
+                if (grid == null)
+                {
+                    Debug.LogError("Grid is not assigned.");
+                    return;
+                }
 
+                if (obstaclePrefabs == null || obstaclePrefabs.Length == 0)
+                {
+                    Debug.LogError("Obstacle prefabs are not assigned or empty.");
+                    return;
+                }
+
+                if (obstacleIndex < 0 || obstacleIndex >= obstaclePrefabs.Length)
+                {
+                    Debug.LogError("Obstacle index is out of range.");
+                    return;
+                }
+            }
+             Vector3 pos = grid.GetPosition(hitPoint.Value);
             Instantiate(obstaclePrefabs[obstacleIndex], pos, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("GetMouseWorldPositionOnPlane returned null.");
         }
 
         // 마우스 우클릭으로 장애물 종류 변경
         if (Input.GetMouseButtonDown(1))
         {
-            obstacleIndex = (obstacleIndex + 1) % obstaclePrefabs.Length;
-            Debug.Log("Obstacle Index: " + obstacleIndex);
+        obstacleIndex = (obstacleIndex + 1) % obstaclePrefabs.Length;
+        Debug.Log("Obstacle Index: " + obstacleIndex);
         }
     }
 
         // 장애물 생성을 위한 좌표값 가져옴
-        private Vector3? GetMouseWorldPositionOnPlane()
+    private Vector3? GetMouseWorldPositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
