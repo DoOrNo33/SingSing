@@ -43,6 +43,7 @@ public class Grid
         return new Vector3(x, 0, z) * cellSize + originPosition;
     }
 
+    // 좌표값 가져옴
     private void GetXZ(Vector3 worldPosition, out int x, out int z)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);

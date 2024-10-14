@@ -1369,6 +1369,7 @@ GameObject:
   - component: {fileID: 1103152868}
   - component: {fileID: 1103152867}
   - component: {fileID: 1103152866}
+  - component: {fileID: 1103152869}
   m_Layer: 0
   m_Name: ScoreBody
   m_TagString: ScoreObj
@@ -1406,7 +1407,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1462,6 +1463,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103152864}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1103152869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103152864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467f840c2d8eb44b5b10081f50792e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreObj: {fileID: 2121377704}
 --- !u!1 &1186446595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121377703}
+  - component: {fileID: 2121377704}
   m_Layer: 0
   m_Name: ScoreObj
   m_TagString: ScoreObj
@@ -2336,6 +2351,20 @@ Transform:
   - {fileID: 1103152865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2121377704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121377702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f7602405a3b480292dbe15d1c399fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  score: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
