@@ -76,4 +76,9 @@ public class Grid
         // 그리드 좌표에 해당하는 월드 좌표 반환
         return new Vector3 (x, 0, z) * cellSize + originPosition;
     }
+
+    public void GetGridPosition(Vector3 worldPosition, out int x, out int z)
+    {
+        GetXZ(worldPosition, out x, out z);
+    }
 }

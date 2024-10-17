@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    [SerializeField] private Grid grid;
+    // 그리드 시스템
+    private Grid grid;
 
+    [Header("Grid")]
+    [SerializeField] private int gridWidth = 10;
+    [SerializeField] private int gridHeight = 10;
+    [SerializeField] private float gridCellSize = 10f;
+    [SerializeField] private float gridOriginX = -50;
+    [SerializeField] private float gridOriginZ = -50;
+
+    [Header("Obstacle")]
     [SerializeField] private GameObject[] obstaclePrefabs;
     [SerializeField] private int obstacleIndex = 0;
-
     private Vector3 obstaclePos = new Vector3 (0, 1, 0);
+
+    [Header("Save")]
+    private int[,] mapSave;
 
     private void Start() 
     {
-        grid = new Grid(10, 10, 10f, new Vector3(-50, 0, -50));
+        grid = new Grid(gridWidth, gridHeight, gridCellSize, new Vector3(gridOriginX, 0, gridOriginZ));
+
+        // 맵 저장용 배열 생성
+        mapSave = new int[gridWidth, gridHeight];
     }
 
     private void Update()
@@ -24,6 +38,11 @@ public class ObstacleGenerator : MonoBehaviour
             Vector3? hitPoint = GetMouseWorldPositionOnPlane();
             Vector3 pos = grid.GetPosition(hitPoint.Value);
             Instantiate(obstaclePrefabs[obstacleIndex], pos + obstaclePos, Quaternion.identity);
+
+            // 맵 저장용 배열에 장애물 위치 저장
+            grid.GetGridPosition(hitPoint.Value, out int x, out int z);
+            mapSave[x, z] = obstacleIndex;
+            Debug.Log("Obstacle Index: " + obstacleIndex);
         }
 
         // 마우스 우클릭으로 장애물 종류 변경
