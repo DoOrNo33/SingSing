@@ -9,38 +9,21 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private GameObject[] obstaclePrefabs;
     [SerializeField] private int obstacleIndex = 0;
 
+    private Vector3 obstaclePos = new Vector3 (0, 1, 0);
+
+    private void Start() 
+    {
+        grid = new Grid(10, 10, 10f, new Vector3(-50, 0, -50));
+    }
+
     private void Update()
     {
         // 마우스 좌클릭으로 장애물 생성
         if (Input.GetMouseButtonDown(0))
         {
             Vector3? hitPoint = GetMouseWorldPositionOnPlane();
-            if (hitPoint.HasValue)
-            {
-                if (grid == null)
-                {
-                    Debug.LogError("Grid is not assigned.");
-                    return;
-                }
-
-                if (obstaclePrefabs == null || obstaclePrefabs.Length == 0)
-                {
-                    Debug.LogError("Obstacle prefabs are not assigned or empty.");
-                    return;
-                }
-
-                if (obstacleIndex < 0 || obstacleIndex >= obstaclePrefabs.Length)
-                {
-                    Debug.LogError("Obstacle index is out of range.");
-                    return;
-                }
-            }
-             Vector3 pos = grid.GetPosition(hitPoint.Value);
-            Instantiate(obstaclePrefabs[obstacleIndex], pos, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("GetMouseWorldPositionOnPlane returned null.");
+            Vector3 pos = grid.GetPosition(hitPoint.Value);
+            Instantiate(obstaclePrefabs[obstacleIndex], pos + obstaclePos, Quaternion.identity);
         }
 
         // 마우스 우클릭으로 장애물 종류 변경
