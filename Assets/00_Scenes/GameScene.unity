@@ -256,6 +256,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158866117}
   m_CullTransparentMesh: 1
+--- !u!1 &204667060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 204667061}
+  - component: {fileID: 204667062}
+  m_Layer: 0
+  m_Name: MapGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &204667061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204667060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &204667062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204667060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6c7d4b464f64e949c02d6ff03d4b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefabs:
+  - {fileID: 7467730707353626943, guid: 5a6a2db02aef44851bc2abe25242a5d0, type: 3}
+  - {fileID: 2937217721662236951, guid: 4f4255437107c4ff4a39a48fcca8a7d6, type: 3}
+  - {fileID: 6839064199763998690, guid: b7ed8a5e0829441b4b516882b931fdb6, type: 3}
+  - {fileID: 484868517590039297, guid: cab6b21de2f9b4935a9ff3a0396fe1a6, type: 3}
 --- !u!1 &330200029
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &653636293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +796,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383ac1c84aa8e4413ab6346bc6cceb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridWidth: 10
+  gridHeight: 10
+  gridCellSize: 10
+  gridOriginX: -50
+  gridOriginZ: -50
   obstaclePrefabs:
   - {fileID: 7467730707353626943, guid: 5a6a2db02aef44851bc2abe25242a5d0, type: 3}
   - {fileID: 2937217721662236951, guid: 4f4255437107c4ff4a39a48fcca8a7d6, type: 3}
@@ -1813,50 +1867,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &1447818083
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1447818085}
-  - component: {fileID: 1447818084}
-  m_Layer: 0
-  m_Name: Testing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1447818084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447818083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75631fa9808684aee94a17afc949645f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1447818085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447818083}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509088847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,9 +2392,9 @@ SceneRoots:
   - {fileID: 859283932}
   - {fileID: 1010548847}
   - {fileID: 729215092}
-  - {fileID: 1447818085}
   - {fileID: 6061668969576875035}
   - {fileID: 7577808213920140554}
   - {fileID: 7033711936212035727}
   - {fileID: 653636294}
   - {fileID: 3302494923496069148}
+  - {fileID: 204667061}

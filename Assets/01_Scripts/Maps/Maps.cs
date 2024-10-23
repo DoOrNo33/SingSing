@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Maps
 {
-    public int[,] mapSave;
+    public abstract int[,] mapLoad();
 }

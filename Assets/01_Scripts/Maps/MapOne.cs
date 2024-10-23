@@ -16,4 +16,9 @@ public class MapOne : Maps
         {1, 2, 2},
         {3, 2, 2}
     };
+
+    public override int[,] mapLoad()
+    {
+        return mapSave;
+    }
 }
