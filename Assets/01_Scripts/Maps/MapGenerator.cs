@@ -34,6 +34,11 @@ public class MapGenerator : MonoBehaviour
         Maps map = maps[index];
         int[,] mapSave = map.mapLoad();
 
+        // 맵 중앙에 맞추기
+        int tempX = Mathf.RoundToInt(gridWidth / 2f) - Mathf.RoundToInt(mapSave.GetLength(0) / 2f);
+        int tempZ = Mathf.RoundToInt(gridHeight / 2f) - Mathf.RoundToInt(mapSave.GetLength(1) / 2f);
+
+
         for (int x = 0; x < mapSave.GetLength(0); x++)
         {
             for (int z = 0; z < mapSave.GetLength(1) ; z++)
@@ -41,12 +46,10 @@ public class MapGenerator : MonoBehaviour
                 int obstacleIndex = mapSave[x, z];
                 if (obstacleIndex != 0)
                 {
-                    Vector3 pos = grid.GetWorldPosition(x, z) + new Vector3(0, 1, 0);
+                    Vector3 pos = grid.GetWorldPosition(x + tempX, z + tempZ) + new Vector3(0, 1, 0); // 높이 조절
                     Instantiate(obstaclePrefabs[obstacleIndex], pos, Quaternion.identity);
                 }
             }
         }
     }
-
-
 }
