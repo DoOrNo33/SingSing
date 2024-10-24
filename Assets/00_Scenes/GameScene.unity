@@ -305,6 +305,11 @@ MonoBehaviour:
   - {fileID: 2937217721662236951, guid: 4f4255437107c4ff4a39a48fcca8a7d6, type: 3}
   - {fileID: 6839064199763998690, guid: b7ed8a5e0829441b4b516882b931fdb6, type: 3}
   - {fileID: 484868517590039297, guid: cab6b21de2f9b4935a9ff3a0396fe1a6, type: 3}
+  gridWidth: 100
+  gridHeight: 100
+  gridCellSize: 10
+  gridOriginX: -500
+  gridOriginZ: -500
 --- !u!1 &330200029
 GameObject:
   m_ObjectHideFlags: 0
