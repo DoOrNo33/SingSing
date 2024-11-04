@@ -32,7 +32,7 @@ public class PlayerMovement : PlayerStateBase
     {
         if (!IsReflection)
         {
-            rb.velocity = playerDir * moveSpeed;
+            rb.linearVelocity = playerDir * moveSpeed;
         }
     }
 
@@ -41,7 +41,7 @@ public class PlayerMovement : PlayerStateBase
         if (rb != null)
         {
             isReflection = true;
-            rb.drag = dragDuringReflection; // 반사 중일 때 드래그 적용
+            rb.linearDamping = dragDuringReflection; // 반사 중일 때 드래그 적용
             rb.AddForce(reflectionDir * reflectionPower, ForceMode.Impulse);
             StartCoroutine(ResetReflection());
         }
@@ -51,7 +51,7 @@ public class PlayerMovement : PlayerStateBase
     {
         yield return new WaitForSeconds(0.5f); // 반사 후 0.5초 동안 이동 멈춤
 
-        rb.drag = 0; // 드래그 초기화
+        rb.linearDamping = 0; // 드래그 초기화
         isReflection = false;
     }
 

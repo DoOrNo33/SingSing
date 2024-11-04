@@ -19,7 +19,7 @@ public class PlayerCollider : MonoBehaviour
                 //pm.IsReflection = true;
 
                 // 진행 방향 반대로 밀어낸다.
-                Vector3 playerDir = playerRb.velocity;
+                Vector3 playerDir = playerRb.linearVelocity;
                 Vector3 reflectionDir = -playerDir.normalized;
                 //playerRb.AddForce(reflectionDir * reflectionPower, ForceMode.Impulse);
                 pm.ReflectPlayer(reflectionDir);
